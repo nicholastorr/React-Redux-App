@@ -1,8 +1,9 @@
 import axios from 'axios';
 import './App.css';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
 
   useEffect(() => {
       axios
@@ -10,7 +11,7 @@ function App() {
       .then(res => console.log(res))
       .catch(err => console.log({ err }))
   }, [])
-
+  console.log(props)
   return (
     <div className="App">
       <h1>Pokemons</h1>
@@ -18,4 +19,10 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    state
+  }
+}
+
+export default connect(mapStateToProps)(App);
