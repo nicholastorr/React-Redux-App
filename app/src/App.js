@@ -1,17 +1,17 @@
-import axios from 'axios';
+
 import './App.css';
-import { useEffect } from 'react';
+
 import { connect } from 'react-redux';
+import { getCharacters } from './state/actions';
+import { useEffect } from 'react';
 
 function App(props) {
 
+  
+  console.log(props.state.characters)
   useEffect(() => {
-      axios
-      .get('https://pokeapi.co/api/v2/pokemon')
-      .then(res => console.log(res))
-      .catch(err => console.log({ err }))
-  }, [])
-  console.log(props)
+    props.getCharacters()
+  }, []);
   return (
     <div className="App">
       <h1>Pokemons</h1>
@@ -25,4 +25,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { getCharacters })(App);
